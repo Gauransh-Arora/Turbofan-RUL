@@ -428,4 +428,13 @@ print(f"F1-Score : {f1_score(y_test_bin, y_pred_bin)*100:.2f}%")
 print("\n============================================================")
 print("MULTI-CLASS CLASSIFICATION: Health Zones")
 print("============================================================")
+
+def to_zones(arr):
+    return pd.cut(np.clip(arr, 0, MAX_RUL),
+                  bins=ZONE_BINS, labels=ZONE_LABELS,
+                  right=True).astype(str)
+
+y_test_zones = to_zones(y_test)
+y_pred_zones = to_zones(y_pred)
+
 print(classification_report(y_test_zones, y_pred_zones))
